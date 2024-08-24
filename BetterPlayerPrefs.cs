@@ -1,6 +1,5 @@
 using System.Globalization;
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
@@ -8,7 +7,6 @@ namespace SpellSinger
 {
     public static class BetterPlayerPrefs
     {
-
         private static readonly string IdbfsPath = GetIdbfsPath();
 
         public static void SetInt(string key, int value)
@@ -156,10 +154,14 @@ namespace SpellSinger
         {
             Directory.CreateDirectory(IdbfsPath);
             File.WriteAllText(GetFilePath(key), stringValue);
+#if UNITY_WEBGL
             SyncIdbfs();
+#endif
         }
 
-        [DllImport("__Internal")]
+#if UNITY_EDITOR
+        [System.Runtime.InteropServices.DllImport("__Internal")]
         private static extern bool SyncIdbfs();
+#endif
     }
 }
