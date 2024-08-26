@@ -159,7 +159,7 @@ namespace SpellSinger
 #endif
         }
 
-#if UNITY_EDITOR
+#if UNITY_WEBGL
         [System.Runtime.InteropServices.DllImport("__Internal")]
         private static extern bool SyncIdbfs();
 #endif
