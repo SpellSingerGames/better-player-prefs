@@ -1,6 +1,6 @@
 {
   "name": "com.spellsinger.better-player-prefs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "displayName": "BetterPlayerPrefs",
   "description": "Enhanced PlayerPrefs that retain their values regardless of the CDN host where the game is hosted. Useful for itch.io and similar sites",
   "unity": "2021.3",

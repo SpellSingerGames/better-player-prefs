@@ -92,7 +92,10 @@ namespace SpellSinger
         public static void DeleteKey(string key)
         {
             if (IsWebGl())
+            {
                 File.Delete(GetFilePath(key));
+                SyncFs();
+            }
             else
                 PlayerPrefs.DeleteKey(key);
         }
@@ -105,6 +108,7 @@ namespace SpellSinger
                 var fileInfos = directoryInfo.GetFiles();
                 foreach (var fileInfo in fileInfos)
                     File.Delete(GetFilePath(fileInfo.Name));
+                SyncFs();
             }
             else
                 PlayerPrefs.DeleteAll();
@@ -154,6 +158,11 @@ namespace SpellSinger
         {
             Directory.CreateDirectory(IdbfsPath);
             File.WriteAllText(GetFilePath(key), stringValue);
+            SyncFs();
+        }
+
+        private static void SyncFs()
+        {
 #if UNITY_WEBGL
             SyncIdbfs();
 #endif
